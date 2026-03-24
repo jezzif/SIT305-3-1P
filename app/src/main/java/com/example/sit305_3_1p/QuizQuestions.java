@@ -88,6 +88,7 @@ public class QuizQuestions extends AppCompatActivity {
         submit.setEnabled(false);
 
         String name = sharedPreferences.getString("USERNAME", "");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         String output = getString(R.string.hello, name);
 
         currentProgress = getString(R.string.progress_bar, currentQuestion);
@@ -160,6 +161,7 @@ public class QuizQuestions extends AppCompatActivity {
                 }
                 // Need to add logic and intent for finish activity.
                 else if (currentQuestion == 5) {
+                    editor.putInt("correctly", correctly).apply();
                     startActivity(FinishQuiz);
                 }
                 else {
