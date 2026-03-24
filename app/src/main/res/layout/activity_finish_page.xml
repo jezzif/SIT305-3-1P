@@ -8,10 +8,9 @@
     tools:context=".FinishPage">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/correctText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello, World!"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
