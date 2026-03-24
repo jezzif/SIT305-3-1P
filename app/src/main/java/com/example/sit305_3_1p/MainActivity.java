@@ -15,8 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    private static MainActivity instance;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        instance = this;
+        Intent StartQuiz = new Intent(this, QuizQuestions.class);
 
         AppCompatButton start_btn = findViewById(R.id.start_btn);
         EditText name_input = findViewById(R.id.name_input);
@@ -40,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 if (!name_input.getText().toString().isEmpty()) {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("USERNAME", name_input.getText().toString()).apply();
-
-                    Intent StartQuiz = new Intent(instance.getApplicationContext(), QuizQuestions.class);
                     startActivity(StartQuiz);
                 }
             }

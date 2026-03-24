@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SIT305_3_1P">
         <activity
+            android:name=".FinishPage"
+            android:exported="false" />
+        <activity
             android:name=".QuizQuestions"
             android:exported="false" />
         <activity

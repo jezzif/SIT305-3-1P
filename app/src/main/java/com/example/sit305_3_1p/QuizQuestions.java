@@ -30,6 +30,7 @@ public class QuizQuestions extends AppCompatActivity {
     int currentQuestion = 1;
     Boolean submitted = false;
     String currentProgress;
+    int correctly = 0;
 
     public void nextQuestion() {
         progressBar.incrementProgressBy(20);
@@ -74,6 +75,7 @@ public class QuizQuestions extends AppCompatActivity {
             return insets;
         });
 
+        Intent FinishQuiz = new Intent(this, FinishPage.class);
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.sit305_3_1p", MODE_PRIVATE);
 
         hello = findViewById(R.id.hello);
@@ -150,10 +152,16 @@ public class QuizQuestions extends AppCompatActivity {
                                 break;
                         }
                     }
+                    else {
+                        correctly++;
+                    }
                     submitted = true;
                     submit.setText(R.string.next);
                 }
                 // Need to add logic and intent for finish activity.
+                else if (currentQuestion == 5) {
+                    startActivity(FinishQuiz);
+                }
                 else {
                     nextQuestion();
                     currentProgress = getString(R.string.progress_bar, currentQuestion);
