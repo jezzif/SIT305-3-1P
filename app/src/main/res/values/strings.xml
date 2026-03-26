@@ -8,4 +8,7 @@
     <string name="submit">Submit</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
+    <string name="congrats">Congratulations, %1$s!</string>
+    <string name="score_label">YOUR SCORE:</string>
+    <string name="new_quiz">Take New Quiz</string>
 </resources>

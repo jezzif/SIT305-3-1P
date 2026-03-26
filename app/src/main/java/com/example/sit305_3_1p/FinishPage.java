@@ -1,11 +1,14 @@
 package com.example.sit305_3_1p;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -23,12 +26,36 @@ public class FinishPage extends AppCompatActivity {
             return insets;
         });
 
+        Intent NewQuiz = new Intent(this, MainActivity.class);
+        NewQuiz.putExtra("Again",true);
+
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.sit305_3_1p", MODE_PRIVATE);
         int correctly = sharedPreferences.getInt("correctly", 0);
-        String yeah = "You got " + correctly + " correct!";
+        String name = sharedPreferences.getString("USERNAME", "");
+        String congrats = getString(R.string.congrats, name);
+        String score = getString(R.string.progress_bar, correctly);
 
         TextView correctText = findViewById(R.id.correctText);
+        TextView congratsText = findViewById(R.id.congratsText);
+        AppCompatButton newQuizBtn = findViewById(R.id.newQuizBtn);
+        AppCompatButton finishBtn = findViewById(R.id.finishBtn);
 
-        correctText.setText(yeah);
+        correctText.setText(score);
+        congratsText.setText(congrats);
+
+        newQuizBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(NewQuiz);
+            }
+        });
+
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+                System.exit(0);
+            }
+        });
     }
 }

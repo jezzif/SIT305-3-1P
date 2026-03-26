@@ -31,12 +31,22 @@ public class MainActivity extends AppCompatActivity {
         EditText name_input = findViewById(R.id.name_input);
 
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.sit305_3_1p", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        boolean again = false;
+        Bundle newQuizIntent = getIntent().getExtras();
+        if (newQuizIntent != null) {
+            again = newQuizIntent.getBoolean("Again");
+        }
+        if (again) {
+            String name = sharedPreferences.getString("USERNAME", "");
+            name_input.setText(name);
+        }
 
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!name_input.getText().toString().isEmpty()) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("USERNAME", name_input.getText().toString()).apply();
                     startActivity(StartQuiz);
                 }
