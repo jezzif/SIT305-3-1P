@@ -7,4 +7,5 @@
         <item>3</item>
         <item>1</item>
     </integer-array>
+    <integer name="totalQuestions">5</integer>
 </resources>

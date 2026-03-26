@@ -33,7 +33,8 @@ public class FinishPage extends AppCompatActivity {
         int correctly = sharedPreferences.getInt("correctly", 0);
         String name = sharedPreferences.getString("USERNAME", "");
         String congrats = getString(R.string.congrats, name);
-        String score = getString(R.string.progress_bar, correctly);
+        int totalQuestions = getResources().getInteger(R.integer.totalQuestions);
+        String score = getString(R.string.progress_bar, correctly, totalQuestions);
 
         TextView correctText = findViewById(R.id.correctText);
         TextView congratsText = findViewById(R.id.congratsText);

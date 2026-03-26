@@ -21,6 +21,8 @@ public class QuizQuestions extends AppCompatActivity {
     TextView hello;
     TextView progressText;
     ProgressBar progressBar;
+    TextView questionTitle;
+    TextView questionDetails;
     AppCompatButton answer1;
     AppCompatButton answer2;
     AppCompatButton answer3;
@@ -31,9 +33,10 @@ public class QuizQuestions extends AppCompatActivity {
     Boolean submitted = false;
     String currentProgress;
     int correctly = 0;
+    int incrementPercentage;
 
     public void nextQuestion() {
-        progressBar.incrementProgressBy(20);
+        progressBar.incrementProgressBy(incrementPercentage);
         picked = 0;
         answerPicked();
         currentQuestion++;
@@ -77,10 +80,14 @@ public class QuizQuestions extends AppCompatActivity {
 
         Intent FinishQuiz = new Intent(this, FinishPage.class);
         SharedPreferences sharedPreferences = getSharedPreferences("com.example.sit305_3_1p", MODE_PRIVATE);
+        int totalQuestions = getResources().getInteger(R.integer.totalQuestions);
+        double totalQ = totalQuestions;
 
         hello = findViewById(R.id.hello);
         progressText = findViewById(R.id.progressText);
         progressBar = findViewById(R.id.progressBar);
+        questionTitle = findViewById(R.id.questionTitle);
+        questionDetails = findViewById(R.id.questionDetails);
         answer1 = findViewById(R.id.answer1);
         answer2 = findViewById(R.id.answer2);
         answer3 = findViewById(R.id.answer3);
@@ -91,13 +98,13 @@ public class QuizQuestions extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String output = getString(R.string.hello, name);
 
-        currentProgress = getString(R.string.progress_bar, currentQuestion);
+        currentProgress = getString(R.string.progress_bar, currentQuestion, totalQuestions);
 
 
         hello.setText(output);
         progressText.setText(currentProgress);
-        progressBar.setProgress(0);
-        progressBar.incrementProgressBy(20);
+        incrementPercentage = (int) Math.ceil(100 / totalQ);
+        progressBar.setProgress(incrementPercentage);
 
         int[] correctAnswers = getResources().getIntArray(R.array.correct_answers);
 
@@ -160,13 +167,13 @@ public class QuizQuestions extends AppCompatActivity {
                     submit.setText(R.string.next);
                 }
                 // Need to add logic and intent for finish activity.
-                else if (currentQuestion == 5) {
+                else if (currentQuestion == totalQuestions) {
                     editor.putInt("correctly", correctly).apply();
                     startActivity(FinishQuiz);
                 }
                 else {
                     nextQuestion();
-                    currentProgress = getString(R.string.progress_bar, currentQuestion);
+                    currentProgress = getString(R.string.progress_bar, currentQuestion, totalQuestions);
                     progressText.setText(currentProgress);
                 }
             }

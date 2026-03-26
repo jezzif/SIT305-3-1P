@@ -4,11 +4,32 @@
     <string name="name_prompt">Enter your name:</string>
     <string name="start_btn">START</string>
     <string name="hello">Welcome, %1$s!</string>
-    <string name="progress_bar">%1$d/5</string>
+    <string name="progress_bar">%1$d/%2$d</string>
     <string name="submit">Submit</string>
     <string name="next">Next</string>
     <string name="finish">Finish</string>
     <string name="congrats">Congratulations, %1$s!</string>
     <string name="score_label">YOUR SCORE:</string>
     <string name="new_quiz">Take New Quiz</string>
+    <string-array name="question_titles">
+        <item>Addition</item>
+        <item>Subtraction</item>
+        <item>Multiplication</item>
+        <item>Division</item>
+        <item>BIDMAS</item>
+    </string-array>
+    <string-array name="questions">
+        <item>12 + 34 =</item>
+        <item>26 – 8 = </item>
+        <item>4 x 7 = </item>
+        <item>24 ÷ 3 =</item>
+        <item>3 * (8 + 6) =</item>
+    </string-array>
+    <string-array name="answers">
+        <item>55,46,1234</item>
+        <item>18,20,34</item>
+        <item>11,21,28</item>
+        <item>12,72,8</item>
+        <item>42,30,6</item>
+    </string-array>
 </resources>
