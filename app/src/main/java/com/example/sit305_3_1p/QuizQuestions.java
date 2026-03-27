@@ -17,6 +17,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Arrays;
+
 public class QuizQuestions extends AppCompatActivity {
     TextView hello;
     TextView progressText;
@@ -34,6 +36,9 @@ public class QuizQuestions extends AppCompatActivity {
     String currentProgress;
     int correctly = 0;
     int incrementPercentage;
+    String[] questionTitles;
+    String[] questions;
+    String[][] answers;
 
     public void nextQuestion() {
         progressBar.incrementProgressBy(incrementPercentage);
@@ -46,6 +51,11 @@ public class QuizQuestions extends AppCompatActivity {
         answer3.setEnabled(true);
         submitted = false;
         submit.setEnabled(false);
+        questionTitle.setText(questionTitles[currentQuestion-1]);
+        questionDetails.setText(questions[currentQuestion-1]);
+        answer1.setText(answers[currentQuestion-1][0]);
+        answer2.setText(answers[currentQuestion-1][1]);
+        answer3.setText(answers[currentQuestion-1][2]);
     }
     public void answerPicked() {
         submit.setEnabled(true);
@@ -83,6 +93,22 @@ public class QuizQuestions extends AppCompatActivity {
         int totalQuestions = getResources().getInteger(R.integer.totalQuestions);
         double totalQ = totalQuestions;
 
+        questionTitles = getResources().getStringArray(R.array.question_titles);
+        questions = getResources().getStringArray(R.array.questions);
+        String[] unsplitAnswers = getResources().getStringArray(R.array.answers);
+        answers = new String[unsplitAnswers.length][];
+        String test[];
+        Log.i("answers", "test initialised");
+        for (int i = 0; i < unsplitAnswers.length; i++) {
+            Log.i("answers", "iteration");
+            test = unsplitAnswers[i].split(",");
+            Log.i("answers", Arrays.toString(test));
+            answers[i] = test;
+            Log.i("answers", Arrays.toString(answers[i]));
+        }
+        //String[] test = unsplitAnswers[0].split(",");
+        Log.i("answers", Arrays.toString(answers));
+
         hello = findViewById(R.id.hello);
         progressText = findViewById(R.id.progressText);
         progressBar = findViewById(R.id.progressBar);
@@ -97,6 +123,12 @@ public class QuizQuestions extends AppCompatActivity {
         String name = sharedPreferences.getString("USERNAME", "");
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String output = getString(R.string.hello, name);
+
+        questionTitle.setText(questionTitles[currentQuestion-1]);
+        questionDetails.setText(questions[currentQuestion-1]);
+        answer1.setText(answers[currentQuestion-1][0]);
+        answer2.setText(answers[currentQuestion-1][1]);
+        answer3.setText(answers[currentQuestion-1][2]);
 
         currentProgress = getString(R.string.progress_bar, currentQuestion, totalQuestions);
 
