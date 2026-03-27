@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,14 +24,19 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // Intent to next activity
         Intent StartQuiz = new Intent(this, QuizQuestions.class);
 
+        // View declarations
         AppCompatButton start_btn = findViewById(R.id.start_btn);
         EditText name_input = findViewById(R.id.name_input);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("com.example.sit305_3_1p", MODE_PRIVATE);
+        // Set up shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.sit305_3_1p",
+                MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        // If the quiz is being repeated keeps the name used in previous session in the input
         boolean again = false;
         Bundle newQuizIntent = getIntent().getExtras();
         if (newQuizIntent != null) {
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             name_input.setText(name);
         }
 
+        // When start button pressed read the name input and add it to shared preferences
+        // Then start the next activity
         start_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
